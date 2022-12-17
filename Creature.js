@@ -100,7 +100,7 @@ export class Creature extends DynamicBody {
     this.elapsedTime += dt;
     for (const connection of this.connections) {
       // If the connection has an animation defined, loop through each step
-      if (connection.animation) {
+      if (connection.animation?.length) {
         let elapsedTime = 0;
 
         // Calculate the elapsed time since the start of the animation
