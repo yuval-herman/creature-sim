@@ -61,11 +61,11 @@ export class Joint extends DynamicBody {
       .copy()
       .subtract(this.ball2.position);
     // Calculate the distance between the two balls
-    const distance = displacement.magnitude();
+    const distance = displacement.magnitude() - this.offset;
     // Calculate the spring force using Hooke's Law: F = -kx
     const springForce = displacement
       .normalize()
-      .multiply((distance - this.length + this.offset) * -this.springConstant);
+      .multiply((distance - this.length) * -this.springConstant);
     // Apply the spring force to each ball
     this.ball1.applyForce(springForce);
     this.ball2.applyForce(springForce.multiply(-1));
