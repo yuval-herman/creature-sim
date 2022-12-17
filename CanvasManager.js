@@ -38,4 +38,13 @@ export class CanvasManager {
       body.applyGravity().updatePosition(dt).animate(dt).draw(this.ctx);
     }
   }
+
+  /**
+   * @param {number} dt
+   */
+  drawFrameRate(dt) {
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "16px serif";
+    this.ctx.fillText("fps: " + 1 / (dt / 1000), 10, 20);
+  }
 }
