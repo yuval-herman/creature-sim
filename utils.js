@@ -55,7 +55,6 @@ export function generateRandomCreature(creatureOptions, generationOptions) {
   [minTension, maxTension] = updateMinMax(minTension, maxTension);
   [minSteps, maxSteps] = updateMinMax(minSteps, maxSteps);
   [minOffset, maxOffset] = updateMinMax(minOffset, maxOffset);
-  console.log(minOffset, maxOffset);
   [minDelay, maxDelay] = updateMinMax(minDelay, maxDelay);
 
   /** @type {UsedOptions} */
@@ -107,12 +106,17 @@ export function generateRandomCreature(creatureOptions, generationOptions) {
 
   for (const connection of usedOptions.joints.connections) {
     const stepsAmount = getRandomNum(maxSteps, minSteps, true);
+    if (maxSteps > 1) {
+      connection.animation?.push({
+        offset: 0,
+        delay: getRandomNum(maxDelay, minDelay, true),
+      });
+    }
     for (let i = 0; i < stepsAmount; i++) {
-      const animation = {
+      connection.animation?.push({
         offset: getRandomNum(maxOffset, minOffset),
         delay: getRandomNum(maxDelay, minDelay, true),
-      };
-      connection.animation?.push(animation);
+      });
     }
   }
   console.log(usedOptions);
